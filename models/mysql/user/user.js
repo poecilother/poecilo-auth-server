@@ -1,4 +1,5 @@
 const { DataTypes } = require("sequelize");
+const argon2 = require('argon2');
 
 module.exports = (sequelize) => {
   const User = sequelize.define(
@@ -34,7 +35,13 @@ module.exports = (sequelize) => {
     { tableName: "user" }
   );
   
-  User.prototype.verifyPassword = function (password) {
-    
+  User.beforeCreate(async (user, options) => {
+    const hashedPassword = await argon2.hash(user.password);
+    user.password = hashedPassword;
+  });
+
+  User.prototype.verifyPassword = async function (password) {
+    if (!await argon2.verify(this.password, password)) return 0;
+    return 1;
   };
 };
