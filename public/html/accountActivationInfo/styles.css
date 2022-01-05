@@ -1,0 +1,79 @@
+
+body, html {
+  padding: 0;
+  margin: 0;
+  font-family: Poppins;
+}
+div.wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+div.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80vw;
+  max-width: 500px;
+  padding-bottom: 60px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+div.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% - 40px);
+  padding: 0 20px;
+  margin-bottom: 60px;
+  border-top-left-radius: 10px;
+  border-top-right-radius:10px;
+  background-color: #FF6D00;
+  color: #fff;
+}
+div.header h1 {
+  font-size: 20px;
+  font-weight: 300;
+  text-align: center;
+}
+div.logo {
+  width: 57px;
+  height: 27px;
+  margin-right: 20px;
+}
+i.material-icons {
+  padding: 30px;
+  font-size: 50px;
+  color: #65CF78;
+  border: 4px solid #65CF78;
+  border-radius: 50%;
+}
+i.material-icons.warning {
+  color: #fea200;
+  border-color: #fea200;
+}
+i.material-icons.error {
+  color: #f15754;
+  border-color: #f15754;
+}
+h2 {
+  margin: 40px 0;
+  font-weight: 400;
+  font-size: 22px;
+  text-align: center;
+  color: #636363;
+}
+button {
+  width: 140px;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #FF6D00;
+  color: #fff;
+}
+button:hover {
+  background-color: #da4e01;
+}

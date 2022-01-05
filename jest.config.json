@@ -1,0 +1,5 @@
+{
+    "setupFilesAfterEnv": ["<rootDir>/configs/jest"],
+    "testEnvironment": "node"
+}
+  
