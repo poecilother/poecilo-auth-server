@@ -1,6 +1,6 @@
 const registerValidation = require('../../../../../middlewares/user/validation/registerValidation');
-const { userValidation } = require('../../../../../utils/user/userMessages');
-const { commonValidation } = require('../../../../../utils/common/commonMessages');
+const userMessages = require('../../../../../utils/user/userMessages');
+const commonMessages = require('../../../../../utils/common/commonMessages');
 const { responseStatus } = require('../../../../../utils/common/restUtils');
 
 describe('registerValidation middleware', () => {
@@ -35,7 +35,7 @@ describe('registerValidation middleware', () => {
   test('Validate_User_ReturnMissingBody', () => {
     const expectedReturn = {
       status: responseStatus.BAD_REQUEST().status,
-      send: commonValidation.body.missing
+      send: commonMessages.validation.body.missing
     };
 
     registerValidation(req, res, next);
@@ -47,7 +47,7 @@ describe('registerValidation middleware', () => {
   test('Validate_User_ReturnMissingUserObject', () => {
     const expectedReturn = {
       status: responseStatus.BAD_REQUEST().status,
-      send: commonValidation.object.missing('user')
+      send: commonMessages.validation.object.missing('user')
     };
 
     req.body = { test: {} };
@@ -61,7 +61,7 @@ describe('registerValidation middleware', () => {
   test('Validate_User_ReturnInvalidUserObject', () => {
     const expectedReturn = {
       status: responseStatus.BAD_REQUEST().status,
-      send: commonValidation.object.invalid('user')
+      send: commonMessages.validation.object.invalid('user')
     };
 
     req.body = { user: {} };
@@ -77,7 +77,7 @@ describe('registerValidation middleware', () => {
       status: responseStatus.BAD_REQUEST().status,
       send: {
         fields: ['email'],
-        msgs: [userValidation.email.missing]
+        msgs: [userMessages.validation.email.missing]
       }
     };
 
@@ -94,7 +94,7 @@ describe('registerValidation middleware', () => {
       status: responseStatus.BAD_REQUEST().status,
       send: {
         fields: ['password'],
-        msgs: [userValidation.password.missing]
+        msgs: [userMessages.validation.password.missing]
       }
     };
 

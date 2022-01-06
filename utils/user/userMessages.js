@@ -1,9 +1,9 @@
 module.exports = {
-  userService: {
+  service: {
 
   },
 
-  userValidation: {
+  validation: {
     email: {
       missing: 'Email is missing.',
       invalid: 'Invalid email.',

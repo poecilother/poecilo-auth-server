@@ -1,5 +1,5 @@
 module.exports = {
-  commonValidation: {
+  validation: {
     body: {
       missing: 'Body is missing.',
     },

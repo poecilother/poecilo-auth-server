@@ -1,5 +1,5 @@
 const validator = require('validator');
-const { userValidation } = require('./userMessages');
+const userMessages = require('./userMessages');
 
 const constraints = {
   password: {
@@ -12,52 +12,52 @@ module.exports = {
   email: (email, response) => {
     if (Object.is(email, undefined) || Object.is(email, null)) {
       response.fields.push('email');
-      response.msgs.push(userValidation.email.missing);
+      response.msgs.push(userMessages.validation.email.missing);
     } else if (typeof email !== 'string' && !(email instanceof String)) {
       response.fields.push('email');
-      response.msgs.push(userValidation.email.type);
+      response.msgs.push(userMessages.validation.email.type);
     } else if (validator.isEmpty(email)) {
       response.fields.push('email');
-      response.msgs.push(userValidation.email.missing);
+      response.msgs.push(userMessages.validation.email.missing);
     } else if (!validator.isEmail(email)) {
       response.fields.push('email');
-      response.msgs.push(userValidation.email.invalid);
+      response.msgs.push(userMessages.validation.email.invalid);
     }
     return response;
   },
   password: (password, response) => {
     if (Object.is(password, undefined) || Object.is(password, null)) {
       response.fields.push('password');
-      response.msgs.push(userValidation.password.missing);
+      response.msgs.push(userMessages.validation.password.missing);
     } else if (typeof password !== 'string' && !(password instanceof String)) {
       response.fields.push('password');
-      response.msgs.push(userValidation.password.type);
+      response.msgs.push(userMessages.validation.password.type);
     } else if (validator.isEmpty(password)) {
       response.fields.push('password');
-      response.msgs.push(userValidation.password.missing);
+      response.msgs.push(userMessages.validation.password.missing);
     } else {
       const passwordValidationMsgs = {};
 
       if (password.length < constraints.password.minLength) {
-        passwordValidationMsgs.minLength = userValidation.password.minLength(constraints.password.minLength);
+        passwordValidationMsgs.minLength = userMessages.validation.password.minLength(constraints.password.minLength);
       }
       if (password.length > constraints.password.maxLength) {
-        passwordValidationMsgs.maxLength = userValidation.password.maxLength(constraints.password.maxLength);
+        passwordValidationMsgs.maxLength = userMessages.validation.password.maxLength(constraints.password.maxLength);
       }
       if (!/\d/.test(password)) {
-        passwordValidationMsgs.digit = userValidation.password.digit;
+        passwordValidationMsgs.digit = userMessages.validation.password.digit;
       }
       if (!/[A-Z]/.test(password)) {
-        passwordValidationMsgs.capital =userValidation.password.capital;
+        passwordValidationMsgs.capital =userMessages.validation.password.capital;
       }
       if (!/[a-z]/.test(password)) {
-        passwordValidationMsgs.small = userValidation.password.small;
+        passwordValidationMsgs.small = userMessages.validation.password.small;
       }
       if (!/(?=\S)\W/.test(password)) {
-        passwordValidationMsgs.special = userValidation.password.special;
+        passwordValidationMsgs.special = userMessages.validation.password.special;
       }
       if (/\s/.test(password)) {
-        passwordValidationMsgs.whiteSpace = userValidation.password.whiteSpace;
+        passwordValidationMsgs.whiteSpace = userMessages.validation.password.whiteSpace;
       }
 
       if (Object.keys(passwordValidationMsgs).length > 0) {
