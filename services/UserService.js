@@ -1,5 +1,5 @@
 const { models } = require('../configs/sequelize');
-const { responseStatus } = require('../functions/restUtils');
+const { responseStatus } = require('../utils/common/restUtils');
 const TokenService = require('./TokenService');
 
 function UserService() {

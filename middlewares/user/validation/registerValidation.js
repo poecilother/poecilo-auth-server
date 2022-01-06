@@ -1,16 +1,20 @@
-const checkRequestBody = require('../../../functions/checkRequestBody');
-const checkIfObjectExist = require('../../../functions/checkIfObjectExist');
-const checkObjectsKeys = require('../../../functions/checkObjectsKeys');
-const userValidation = require('../../../functions/user/userValidation');
-const { responseStatus } = require('../../../functions/restUtils');
+const checkRequestBody = require('../../../utils/common/checkRequestBody');
+const checkIfObjectExist = require('../../../utils/common/checkIfObjectExist');
+const checkObjectsKeys = require('../../../utils/common/checkObjectsKeys');
+const { responseStatus } = require('../../../utils/common/restUtils');
+const userValidation = require('../../../utils/user/userValidation');
+const { commonValidation } = require('../../../utils/common/commonMessages');
 
 function registerValidation(req, res, next) {
   const userObjectKeys = ['email', 'password'];
   let response = { fields: [], msgs: [] };
   
-  if (!checkRequestBody(req)) return res.status(responseStatus.BAD_REQUEST().status).send('Body is missing.');
-  if (!checkIfObjectExist(req.body.user)) return res.status(responseStatus.BAD_REQUEST().status).send('Object user is missing.');
-  if (!checkObjectsKeys(req.body.user, userObjectKeys)) return res.status(responseStatus.BAD_REQUEST().status).send('Invalid user object.');
+  if (!checkRequestBody(req)) 
+    return res.status(responseStatus.BAD_REQUEST().status).send(commonValidation.body.missing);
+  if (!checkIfObjectExist(req.body.user))
+    return res.status(responseStatus.BAD_REQUEST().status).send(commonValidation.object.missing('user'));
+  if (!checkObjectsKeys(req.body.user, userObjectKeys))
+    return res.status(responseStatus.BAD_REQUEST().status).send(commonValidation.object.invalid('user'));
   
   response = userValidation.email(req.body.user.email, response);
   response = userValidation.password(req.body.user.password, response);
